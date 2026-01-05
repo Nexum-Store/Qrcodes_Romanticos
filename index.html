@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosso Amor ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(to bottom, #ff5f8f, #ff8fa3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Georgia', serif;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 360px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+        backdrop-filter: blur(6px);
+    }
+
+    /* Coração inicial */
+    .heart {
+        width: 90px;
+        height: 90px;
+        background: #ff1e56;
+        margin: 40px auto;
+        transform: rotate(-45deg);
+        animation: pulse 1.2s infinite;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        width: 90px;
+        height: 90px;
+        background: #ff1e56;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .heart::before {
+        top: -45px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 45px;
+        top: 0;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1) rotate(-45deg); }
+        50% { transform: scale(1.15) rotate(-45deg); }
+        100% { transform: scale(1) rotate(-45deg); }
+    }
+
+    .conteudo {
+        display: none;
+        animation: fadeIn 1.5s forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FOTO COM ALTURA REDUZIDA */
+    .foto {
+        width: 100%;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    /* TEXTO JUSTIFICADO */
+    .poema {
+        font-size: 18px;
+        line-height: 1.7;
+        text-align: justify;              /* JUSTIFICADO */
+        text-justify: inter-word;
+        padding: 10px 5px;
+    }
+
+    .assinatura {
+        margin-top: 15px;
+        font-style: italic;
+        font-size: 14px;
+        opacity: 0.9;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Coração inicial -->
+    <div class="heart" onclick="abrir()"></div>
+
+    <!-- Conteúdo -->
+    <div class="conteudo" id="conteudo">
+
+        <!-- FOTO DO CASAL -->
+        <img src="img/fotocasal.jpg" class="foto" alt="Nossa foto">
+
+        <!-- POEMA -->
+        <div class="poema">
+            Não foi o acaso que te trouxe,
+            foi o destino com calma nas mãos.<br><br>
+
+            Te encontrei no meio do mundo,
+            e o mundo ficou pequeno
+            dentro do teu abraço.<br><br>
+
+            Se o tempo passar devagar,
+            eu espero.
+            Se passar rápido,
+            eu aproveito.<br><br>
+
+            Porque amar você
+            é o meu agora,
+            e também o meu sempre.
+        </div>
+
+        <div class="assinatura">
+            Com amor, ❤️<br>
+            Para nós dois
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function abrir() {
+        document.querySelector('.heart').style.display = 'none';
+        document.getElementById('conteudo').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
