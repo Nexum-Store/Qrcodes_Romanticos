@@ -27,7 +27,7 @@
         backdrop-filter: blur(6px);
     }
 
-    /* Coração inicial */
+    /* Coração */
     .heart {
         width: 90px;
         height: 90px;
@@ -75,7 +75,6 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* FOTO COM ALTURA REDUZIDA */
     .foto {
         width: 100%;
         max-height: 220px;
@@ -85,12 +84,10 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.3);
     }
 
-    /* TEXTO JUSTIFICADO */
     .poema {
         font-size: 18px;
         line-height: 1.7;
-        text-align: justify;              /* JUSTIFICADO */
-        text-justify: inter-word;
+        text-align: justify;
         padding: 10px 5px;
     }
 
@@ -108,13 +105,13 @@
 
 <div class="container">
 
-    <!-- Coração inicial -->
+    <!-- Coração -->
     <div class="heart" onclick="abrir()"></div>
 
     <!-- Conteúdo -->
     <div class="conteudo" id="conteudo">
 
-        <!-- FOTO DO CASAL -->
+        <!-- FOTO -->
         <img src="img/fotocasal.jpg" class="foto" alt="Nossa foto">
 
         <!-- POEMA -->
@@ -145,11 +142,32 @@
 
 </div>
 
+<!-- MÚSICA DE FUNDO -->
+<audio id="musica" loop preload="auto">
+    <source src="musica.mp3/Eternal Love - Danny & The Dreamers (youtube).mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+</audio>
+
 <script>
-    function abrir() {
-        document.querySelector('.heart').style.display = 'none';
-        document.getElementById('conteudo').style.display = 'block';
-    }
+function abrir() {
+    document.querySelector('.heart').style.display = 'none';
+    document.getElementById('conteudo').style.display = 'block';
+
+    const audio = document.getElementById('musica');
+    audio.volume = 0;
+    audio.play();
+
+    // Fade-in suave do volume
+    let volume = 0;
+    const fade = setInterval(() => {
+        if (volume < 0.35) {
+            volume += 0.02;
+            audio.volume = volume;
+        } else {
+            clearInterval(fade);
+        }
+    }, 120);
+}
 </script>
 
 </body>
