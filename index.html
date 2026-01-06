@@ -3,170 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosso Amor ❤️</title>
+<title>Um Sentimento ❤️</title>
 
 <style>
-    body {
-        margin: 0;
-        min-height: 100vh;
-        background: linear-gradient(to bottom, #ff5f8f, #ff8fa3);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Georgia', serif;
-    }
+* { box-sizing: border-box; }
 
-    .container {
-        width: 95%;
-        max-width: 360px;
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 20px;
-        padding: 20px;
-        text-align: center;
-        color: #fff;
-        backdrop-filter: blur(6px);
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #2a0015, #0a0005 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+    color: #fff;
+}
 
-    /* Coração */
-    .heart {
-        width: 90px;
-        height: 90px;
-        background: #ff1e56;
-        margin: 40px auto;
-        transform: rotate(-45deg);
-        animation: pulse 1.2s infinite;
-        cursor: pointer;
-        position: relative;
-    }
+/* PARTÍCULAS */
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.6), transparent),
+        radial-gradient(1.5px 1.5px at 70% 60%, rgba(255,150,200,.5), transparent),
+        radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.4), transparent),
+        radial-gradient(2px 2px at 80% 20%, rgba(255,120,170,.6), transparent);
+    animation: sparkle 12s linear infinite;
+}
 
-    .heart::before,
-    .heart::after {
-        content: "";
-        width: 90px;
-        height: 90px;
-        background: #ff1e56;
-        border-radius: 50%;
-        position: absolute;
-    }
+@keyframes sparkle {
+    from { transform: translateY(0); }
+    to { transform: translateY(-150px); }
+}
 
-    .heart::before {
-        top: -45px;
-        left: 0;
-    }
+/* TELA INICIAL */
+.wrapper {
+    position: relative;
+    width: 320px;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-    .heart::after {
-        left: 45px;
-        top: 0;
-    }
+/* ANEL */
+.glow-ring {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,80,130,.3), transparent 70%);
+    animation: slowPulse 4s ease-in-out infinite;
+}
 
-    @keyframes pulse {
-        0% { transform: scale(1) rotate(-45deg); }
-        50% { transform: scale(1.15) rotate(-45deg); }
-        100% { transform: scale(1) rotate(-45deg); }
-    }
+@keyframes slowPulse {
+    0%,100% { transform: scale(1); opacity: .6; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
 
-    .conteudo {
-        display: none;
-        animation: fadeIn 1.5s forwards;
-    }
+/* CORAÇÃO */
+.heart-btn {
+    width: 110px;
+    height: 110px;
+    background: #ff2f6d;
+    transform: rotate(-45deg);
+    position: relative;
+    cursor: pointer;
+    animation: heartbeat 3.2s infinite;
+    box-shadow: 0 0 40px rgba(255,60,120,.9);
+    z-index: 2;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.heart-btn::before,
+.heart-btn::after {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    background: #ff2f6d;
+    border-radius: 50%;
+}
 
-    .foto {
-        width: 100%;
-        max-height: 220px;
-        object-fit: cover;
-        border-radius: 15px;
-        margin-bottom: 15px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
+.heart-btn::before { top: -55px; left: 0; }
+.heart-btn::after { left: 55px; top: 0; }
 
-    .poema {
-        font-size: 18px;
-        line-height: 1.7;
-        text-align: justify;
-        padding: 10px 5px;
-    }
+@keyframes heartbeat {
+    0% { transform: scale(1) rotate(-45deg); }
+    20% { transform: scale(1.05) rotate(-45deg); }
+    30% { transform: scale(1) rotate(-45deg); }
+    55% { transform: scale(1.12) rotate(-45deg); }
+    75% { transform: scale(1) rotate(-45deg); }
+    100% { transform: scale(1) rotate(-45deg); }
+}
 
-    .assinatura {
-        margin-top: 15px;
-        font-style: italic;
-        font-size: 14px;
-        opacity: 0.9;
-        text-align: center;
+.tap-text {
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: .8;
+    letter-spacing: 1px;
+}
+
+/* CONTEÚDO */
+.content {
+    display: none;
+    text-align: center;
+    animation: appear 2s ease forwards;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px) scale(.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* FOTO NO CONTEÚDO */
+.foto {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 20px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255,80,130,.45);
+}
+
+.foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poema {
+    font-size: 18px;
+    line-height: 1.8;
+    padding: 10px;
+    text-shadow: 0 0 15px rgba(255,120,170,.4);
+}
+
+.poema-container {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.poema-rolagem {
+    position: absolute;
+    top: 15%; /* começa mais próxima da foto */
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+
+    font-size: 18px;
+    line-height: 1.9;
+    text-shadow: 0 0 15px rgba(255,120,170,.4);
+
+    animation: subirPoema 65s linear forwards; /* rolagem mais lenta */
+    animation-delay: 1s;
+}
+
+.amor-final {
+    position: absolute;
+    top: 30%; /* mais para cima */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    opacity: 0;
+    text-shadow: 0 0 20px rgba(255,120,170,.9);
+
+    animation: aparecerFinal 2s ease forwards; /* aparecendo rápido */
+    animation-delay: 66.5s; /* quase que imediatamente após o poema sumir */
+}
+
+@keyframes subirPoema {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
     }
+    85% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120%);
+        opacity: 0;
+    }
+}
+
+@keyframes aparecerFinal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="particles"></div>
 
-    <!-- Coração -->
-    <div class="heart" onclick="abrir()"></div>
+<!-- TELA 1 -->
+<div class="wrapper" id="wrapper">
+    <div class="glow-ring"></div>
+    <div class="heart-btn" onclick="abrir()"></div>
+    <div class="tap-text">toque no coração</div>
+</div>
 
-    <!-- Conteúdo -->
-    <div class="conteudo" id="conteudo">
+<!-- TELA 2 -->
+<div class="content" id="content">
 
-        <!-- FOTO -->
-        <img src="img/fotocasal.jpg" class="foto" alt="Nossa foto">
+    <div class="foto">
+        <img src="img/fotocasal.jpg" alt="Foto do casal">
+    </div>
 
-        <!-- POEMA -->
-        <div class="poema">
-            Não foi o acaso que te trouxe,
-            foi o destino com calma nas mãos.<br><br>
+  <div class="poema-container">
 
-            Te encontrei no meio do mundo,
-            e o mundo ficou pequeno
-            dentro do teu abraço.<br><br>
+    <div class="poema-rolagem">
+        O amor não chega fazendo barulho.<br>
+        Ele chega ficando.<br><br>
 
-            Se o tempo passar devagar,
-            eu espero.
-            Se passar rápido,
-            eu aproveito.<br><br>
+        Fica quando tudo silencia,<br>
+        quando o mundo desacelera<br>
+        e o coração aprende a ouvir.<br><br>
 
-            Porque amar você
-            é o meu agora,
-            e também o meu sempre.
-        </div>
+        Ele mora nos detalhes pequenos,<br>
+        nos gestos que ninguém vê,<br>
+        nas promessas que não precisam ser ditas.<br><br>
 
-        <div class="assinatura">
-            Com amor, ❤️<br>
-            Para nós dois
-        </div>
+        Amar é atravessar dias nublados<br>
+        sabendo que o sol não foi embora,<br>
+        apenas está esperando o momento certo de voltar.<br><br>
 
+        É segurar a mão mesmo com medo,<br>
+        é escolher ficar mesmo quando seria mais fácil partir.<br><br>
+
+        O amor ensina paciência,<br>
+        ensina cuidado,<br>
+        ensina que sentir é coragem.<br><br>
+
+        Ele transforma o comum em especial,<br>
+        o simples em eterno,<br>
+        o instante em memória.<br><br>
+
+        Porque amar é isso:<br>
+        encontrar casa em alguém<br>
+        e nunca mais querer ir embora.
+    </div>
+
+    <!-- FRASE FINAL -->
+    <div class="amor-final">
+        Feito com muito amor ❤️
     </div>
 
 </div>
 
-<!-- MÚSICA DE FUNDO -->
-<audio id="musica" loop preload="auto">
+
+</div>
+
+<!-- BATIMENTO -->
+<audio id="batida" preload="auto" loop>
+    <source src="musica.mp3/Som de coração batendo.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MÚSICA -->
+<audio id="musica" preload="auto" loop>
     <source src="musica.mp3/Eternal Love - Danny & The Dreamers (youtube).mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
 </audio>
 
 <script>
+const batida = document.getElementById("batida");
+const musica = document.getElementById("musica");
+
+/* BATIMENTO INICIA AO ENTRAR NO SITE */
+window.addEventListener("load", () => {
+    batida.volume = 0.25;
+    batida.play().catch(() => {
+        document.body.addEventListener("click", () => {
+            batida.play();
+        }, { once: true });
+    });
+});
+
 function abrir() {
-    document.querySelector('.heart').style.display = 'none';
-    document.getElementById('conteudo').style.display = 'block';
 
-    const audio = document.getElementById('musica');
-    audio.volume = 0;
-    audio.play();
+    /* GARANTE BATIMENTO ALTO E NÍTIDO */
+    batida.volume = 1;
+    batida.currentTime = 0;
+    batida.play();
 
-    // Fade-in suave do volume
-    let volume = 0;
-    const fade = setInterval(() => {
-        if (volume < 0.35) {
-            volume += 0.02;
-            audio.volume = volume;
-        } else {
-            clearInterval(fade);
-        }
-    }, 120);
+    /* ESPERA 3 SEGUNDOS OUVINDO O CORAÇÃO */
+    setTimeout(() => {
+
+        /* FADE OUT DO BATIMENTO */
+        let vol = batida.volume;
+        const fadeBatida = setInterval(() => {
+            if (vol > 0.05) {
+                vol -= 0.05;
+                batida.volume = vol;
+            } else {
+                batida.pause();
+                clearInterval(fadeBatida);
+            }
+        }, 100);
+
+        /* TROCA DE TELA */
+        document.getElementById("wrapper").style.display = "none";
+        document.getElementById("content").style.display = "block";
+
+        /* INICIA MÚSICA */
+        musica.volume = 0;
+        musica.play();
+
+        let volMusic = 0;
+        const fadeMusic = setInterval(() => {
+            if (volMusic < 0.35) {
+                volMusic += 0.02;
+                musica.volume = volMusic;
+            } else {
+                clearInterval(fadeMusic);
+            }
+        }, 150);
+
+    }, 3000); // ⏱️ 3 segundos exatos
 }
 </script>
 
