@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Um Sentimento ❤️</title>
+<title>Um Sentimento ❤️ - presente</title>
 
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; margin:0; padding:0; }
 
 body {
     margin: 0;
@@ -29,7 +29,7 @@ body {
         radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.6), transparent),
         radial-gradient(1.5px 1.5px at 70% 60%, rgba(255,150,200,.5), transparent),
         radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.4), transparent),
-        radial-gradient(2px 2px at 80% 20%, rgba(255,120,170,.6), transparent);
+        radial-gradient(2px 2px at 80% 20%, rgba(100,150,255,.6), transparent);
     animation: sparkle 12s linear infinite;
 }
 
@@ -55,7 +55,7 @@ body {
     width: 260px;
     height: 260px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,80,130,.3), transparent 70%);
+    background: radial-gradient(circle, rgba(100,150,255,.3), transparent 70%);
     animation: slowPulse 4s ease-in-out infinite;
 }
 
@@ -73,7 +73,7 @@ body {
     position: relative;
     cursor: pointer;
     animation: heartbeat 3.2s infinite;
-    box-shadow: 0 0 40px rgba(255,60,120,.9);
+    box-shadow: 0 0 50px rgba(255,60,120,.9);
     z-index: 2;
 }
 
@@ -106,103 +106,47 @@ body {
     letter-spacing: 1px;
 }
 
-/* CONTEÚDO */
-.content {
-    display: none;
-    text-align: center;
-    animation: appear 2s ease forwards;
-}
-
-@keyframes appear {
-    from { opacity: 0; transform: translateY(20px) scale(.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* FOTO NO CONTEÚDO */
-.foto {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 20px;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(255,80,130,.45);
-}
-
-.foto img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.poema {
-    font-size: 18px;
-    line-height: 1.8;
-    padding: 10px;
-    text-shadow: 0 0 15px rgba(255,120,170,.4);
-}
-
-.poema-container {
-    position: relative;
-    height: 320px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.poema-rolagem {
+/* MENSAGEM CONFIRMAÇÃO – MAIOR */
+.confirm-box {
     position: absolute;
-    top: 15%; /* começa mais próxima da foto */
-    width: 100%;
-    padding: 0 20px;
-    text-align: center;
-
-    font-size: 18px;
-    line-height: 1.9;
-    text-shadow: 0 0 15px rgba(255,120,170,.4);
-
-    animation: subirPoema 65s linear forwards; /* rolagem mais lenta */
-    animation-delay: 1s;
-}
-
-.amor-final {
-    position: absolute;
-    top: 30%; /* mais para cima */
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: rgba(30,0,30,.95);
+    padding: 50px 50px; /* maior espaço */
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    text-align: center;
+    display: none;
+    z-index: 10;
+    box-shadow: 0 0 40px rgba(255,50,120,.8);
+    animation: fadeIn 1s ease forwards;
     font-size: 20px;
-    letter-spacing: 1.5px;
-    opacity: 0;
-    text-shadow: 0 0 20px rgba(255,120,170,.9);
-
-    animation: aparecerFinal 2s ease forwards; /* aparecendo rápido */
-    animation-delay: 66.5s; /* quase que imediatamente após o poema sumir */
+    line-height: 1.5;
 }
 
-@keyframes subirPoema {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    85% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-120%);
-        opacity: 0;
-    }
+.confirm-box button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
+    background: #ff2f6d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s;
 }
 
-@keyframes aparecerFinal {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -45%) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
+.confirm-box button:hover {
+    transform: scale(1.05);
 }
 
-
+/* ANIMAÇÃO APARECER */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
 </style>
 </head>
 
@@ -210,81 +154,33 @@ body {
 
 <div class="particles"></div>
 
-<!-- TELA 1 -->
 <div class="wrapper" id="wrapper">
     <div class="glow-ring"></div>
-    <div class="heart-btn" onclick="abrir()"></div>
+    <div class="heart-btn" id="heartBtn"></div>
     <div class="tap-text">toque no coração</div>
+
+    <!-- BOX DE CONFIRMAÇÃO -->
+    <div class="confirm-box" id="confirmBox">
+        <div>Deseja continuar com a surpresa? 💖</div>
+        <button id="btnSim">Sim</button>
+    </div>
 </div>
 
-<!-- TELA 2 -->
-<div class="content" id="content">
-
-    <div class="foto">
-        <img src="img/fotocasal.jpg" alt="Foto do casal">
-    </div>
-
-  <div class="poema-container">
-
-    <div class="poema-rolagem">
-        O amor não chega fazendo barulho.<br>
-        Ele chega ficando.<br><br>
-
-        Fica quando tudo silencia,<br>
-        quando o mundo desacelera<br>
-        e o coração aprende a ouvir.<br><br>
-
-        Ele mora nos detalhes pequenos,<br>
-        nos gestos que ninguém vê,<br>
-        nas promessas que não precisam ser ditas.<br><br>
-
-        Amar é atravessar dias nublados<br>
-        sabendo que o sol não foi embora,<br>
-        apenas está esperando o momento certo de voltar.<br><br>
-
-        É segurar a mão mesmo com medo,<br>
-        é escolher ficar mesmo quando seria mais fácil partir.<br><br>
-
-        O amor ensina paciência,<br>
-        ensina cuidado,<br>
-        ensina que sentir é coragem.<br><br>
-
-        Ele transforma o comum em especial,<br>
-        o simples em eterno,<br>
-        o instante em memória.<br><br>
-
-        Porque amar é isso:<br>
-        encontrar casa em alguém<br>
-        e nunca mais querer ir embora.
-    </div>
-
-    <!-- FRASE FINAL -->
-    <div class="amor-final">
-        Feito com muito amor ❤️
-    </div>
-
-</div>
-
-
-</div>
-
-<!-- BATIMENTO -->
+<!-- ÁUDIO BATIMENTO -->
 <audio id="batida" preload="auto" loop>
     <source src="musica.mp3/Som de coração batendo.mp3" type="audio/mpeg">
 </audio>
 
-<!-- MÚSICA -->
-<audio id="musica" preload="auto" loop>
-    <source src="musica.mp3/Eternal Love - Danny & The Dreamers (youtube).mp3" type="audio/mpeg">
-</audio>
-
 <script>
+const heartBtn = document.getElementById("heartBtn");
+const confirmBox = document.getElementById("confirmBox");
+const btnSim = document.getElementById("btnSim");
 const batida = document.getElementById("batida");
-const musica = document.getElementById("musica");
 
-/* BATIMENTO INICIA AO ENTRAR NO SITE */
+/* BATIMENTO INICIAL – MAIS ALTO E EM LOOP */
 window.addEventListener("load", () => {
-    batida.volume = 0.25;
+    batida.volume = 1; // mais alto
+    batida.loop = true; // garante looping contínuo
     batida.play().catch(() => {
         document.body.addEventListener("click", () => {
             batida.play();
@@ -292,48 +188,17 @@ window.addEventListener("load", () => {
     });
 });
 
-function abrir() {
+/* AO CLICAR NO CORAÇÃO */
+heartBtn.addEventListener("click", () => {
+    heartBtn.style.display = "none";
+    document.querySelector('.tap-text').style.display = "none";
+    confirmBox.style.display = "block";
+});
 
-    /* GARANTE BATIMENTO ALTO E NÍTIDO */
-    batida.volume = 1;
-    batida.currentTime = 0;
-    batida.play();
-
-    /* ESPERA 3 SEGUNDOS OUVINDO O CORAÇÃO */
-    setTimeout(() => {
-
-        /* FADE OUT DO BATIMENTO */
-        let vol = batida.volume;
-        const fadeBatida = setInterval(() => {
-            if (vol > 0.05) {
-                vol -= 0.05;
-                batida.volume = vol;
-            } else {
-                batida.pause();
-                clearInterval(fadeBatida);
-            }
-        }, 100);
-
-        /* TROCA DE TELA */
-        document.getElementById("wrapper").style.display = "none";
-        document.getElementById("content").style.display = "block";
-
-        /* INICIA MÚSICA */
-        musica.volume = 0;
-        musica.play();
-
-        let volMusic = 0;
-        const fadeMusic = setInterval(() => {
-            if (volMusic < 0.35) {
-                volMusic += 0.02;
-                musica.volume = volMusic;
-            } else {
-                clearInterval(fadeMusic);
-            }
-        }, 150);
-
-    }, 3000); // ⏱️ 3 segundos exatos
-}
+/* AO CLICAR EM SIM → REDIRECIONA PARA TELA 2 */
+btnSim.addEventListener("click", () => {
+    window.location.href = "index2.html"; // caminho da segunda tela
+});
 </script>
 
 </body>
